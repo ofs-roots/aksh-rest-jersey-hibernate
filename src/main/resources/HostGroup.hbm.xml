@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+   
+    <class name="com.ofs.Model.HostGroupJerseyModel" table="Hosttable">
+    
+    <id name = "id" type = "int" column = "id">
+         <generator class="native"/>
+      </id>
+       
+        <!-- <id name="id" type="integer">
+            <column name="id" not-null="true" />
+        </id> -->
+		<property name="parentid" type="integer">
+			<column name="parentid" not-null="true" />
+		</property>
+        
+        <property name="name" type="string">
+            <column name="name" not-null="true" />
+        </property>
+
+       
+        <property name="hostbaseline" type="boolean">
+            <column name="hostbaseline" not-null="true" />
+        </property>
+        <property name="suppress_excluded_service" type="boolean">
+            <column name="suppress_excluded_service" not-null="true" />
+        </property>
+        <property name="inverse_suppression" type="boolean">
+            <column name="inverse_suppression" not-null="true" />
+        </property>
+        <property name="host_trap" type="boolean">
+            <column name="host_trap" not-null="true" />
+        </property>
+         <property name="send_to_cta" type="boolean">
+            <column name="send_to_cta" not-null="true" />
+        </property>
+         <property name="description" type="string">
+            <column name="descriptions" not-null="true" />
+        </property>
+       <!--  <property name="ip_address_range" type="string">
+        <column name="ip_address_range" length="50" not-null="true"/>
+        </property> -->
+        
+    </class>
+</hibernate-mapping>
