@@ -20,6 +20,13 @@ import com.ofs.service.HostGroupJerseyServiceImpl;;
 public class HostGroupJerseyController {
 	HostGroupJerseyModel  hostgroup = new HostGroupJerseyModel();
 	 HostGroupJerseyService hostservice = new HostGroupJerseyServiceImpl();
+	 
+	 @POST
+	 @Path("/addMultipleValues")
+	 @Produces(MediaType.APPLICATION_JSON)
+	 public List<HostGroupJerseyModel> addHostGroup(List<HostGroupJerseyModel> host){
+		 return hostservice.addMultipleHost(host);
+	 }
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -46,13 +53,19 @@ public class HostGroupJerseyController {
 	
 	@PUT
 	@Path("/{id}")
-	public HostGroupJerseyModel update(@PathParam("id") int id, HostGroupJerseyModel hostmodel) {
+	public boolean update(@PathParam("id") int id, HostGroupJerseyModel hostmodel) {
 		return hostservice.updateHostGroup(id,hostmodel);
+	}
+	
+	@PUT
+	@Path("/editMultipleHost")
+	public boolean updateMultipleHost(List<HostGroupJerseyModel> host) {
+		return hostservice.updateMultiHost(host);
 	}
 	
 	@DELETE
 	@Path("/delete/{id}")
-	public String delete(@PathParam("id") int id) {
+	public boolean delete(@PathParam("id") int id) {
 		return hostservice.deleteHostGroup(id);
 	}
 

@@ -56,7 +56,7 @@ public class HostGroupJerseyDaoImpl implements HostGroupJerseyDao {
 		
 	}
 	
-	public HostGroupJerseyModel updateHostGroup(int id, HostGroupJerseyModel hostmodel) {
+	public boolean updateHostGroup(int id, HostGroupJerseyModel hostmodel) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		Query qry=session.createQuery("update HostGroupJerseyModel hostmodel set hostmodel.name='"+hostmodel.getName()+"',hostmodel.description='"+hostmodel.getDescription()+"',hostmodel.parentid='"+hostmodel.getParentid()+"',hostmodel.hostbaseline='"+hostmodel.isHostbaseline()+"',hostmodel.suppress_excluded_service='"+hostmodel.isSuppress_excluded_service()+"',hostmodel.host_trap='"+hostmodel.isHost_trap()+"',hostmodel.send_to_cta='"+hostmodel.isSend_to_cta()+"',hostmodel.inverse_suppression='"+hostmodel.isInverse_suppression()+"' where hostmodel.id="+id);
@@ -64,17 +64,46 @@ public class HostGroupJerseyDaoImpl implements HostGroupJerseyDao {
 				
 		session.beginTransaction().commit();
 		HibernateUtil.getSessionFactory().close();
-		return hostmodel;
+		return true;
 		
 	}
 	
-	public String deleteHostGroup(int id) {
+	public boolean deleteHostGroup(int id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		session.createQuery("delete from HostGroupJerseyModel hostmodel where hostmodel.id="+id).executeUpdate();
 		session.beginTransaction().commit();
 		HibernateUtil.getSessionFactory().close();
-		return "Deleted Successfully";
+		return true;
+		
+	}
+	
+	@Override
+	public List<HostGroupJerseyModel> addMultipleHost(List<HostGroupJerseyModel> host) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		for(HostGroupJerseyModel hostmodel: host) {
+			 int hostid = (Integer)session.save(hostmodel);
+			 session.beginTransaction().commit();
+		}
+		HibernateUtil.getSessionFactory().close();
+		
+		return host;
+	}
+	
+	@Override
+	public boolean updateMultiHost(List<HostGroupJerseyModel> host) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		for(HostGroupJerseyModel hostmodel: host) {
+
+		Query qry=session.createQuery("update HostGroupJerseyModel hostmodel set hostmodel.name='"+hostmodel.getName()+"',hostmodel.description='"+hostmodel.getDescription()+"',hostmodel.parentid='"+hostmodel.getParentid()+"',hostmodel.hostbaseline='"+hostmodel.isHostbaseline()+"',hostmodel.suppress_excluded_service='"+hostmodel.isSuppress_excluded_service()+"',hostmodel.host_trap='"+hostmodel.isHost_trap()+"',hostmodel.send_to_cta='"+hostmodel.isSend_to_cta()+"',hostmodel.inverse_suppression='"+hostmodel.isInverse_suppression()+"' where hostmodel.id="+hostmodel.getId());
+		int updated = qry.executeUpdate();
+		session.beginTransaction().commit();
+		}	
+		
+		HibernateUtil.getSessionFactory().close();
+		return true;
 		
 	}
 	
@@ -143,6 +172,10 @@ public class HostGroupJerseyDaoImpl implements HostGroupJerseyDao {
 		return parent;
 			
 				}
+
+	
+
+	
 	
 }
 	
