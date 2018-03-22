@@ -1,6 +1,17 @@
 package com.ofs.service;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.ws.rs.core.Response;
+
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import com.ofs.Model.HostGroupJerseyModel;
 import com.ofs.dao.HostGroupJerseyDao;
@@ -10,10 +21,16 @@ public class HostGroupJerseyServiceImpl implements HostGroupJerseyService {
 	
 	HostGroupJerseyDao hostdao = new HostGroupJerseyDaoImpl();
 
-	public int getHost(HostGroupJerseyModel hostmodel) {
+	public int addHost(HostGroupJerseyModel hostmodel) {
 		
 		// TODO Auto-generated method stub
-		return hostdao.getHost(hostmodel);
+		return hostdao.addHost(hostmodel);
+	}
+	
+	@Override
+	public HostGroupJerseyModel getRecordById(int id) {
+		// TODO Auto-generated method stub
+		return hostdao.getRecordById(id);
 	}
 
 	public List<HostGroupJerseyModel> getHostGroupRecords() {
@@ -21,16 +38,18 @@ public class HostGroupJerseyServiceImpl implements HostGroupJerseyService {
 	}
 
 	public List<HostGroupJerseyModel> getHostGroupTree() {
-		// TODO Auto-generated method stub
-		return hostdao.getHostGroupTree();
+		
+		List<HostGroupJerseyModel> hostlist = hostdao.getHostGroupRecords();
+		List<HostGroupJerseyModel> treelist = getJsonTree(hostlist);
+		return treelist;
 	}
 
-	public boolean updateHostGroup(int id, HostGroupJerseyModel hostmodel) {
+	public Response updateHostGroup(HostGroupJerseyModel hostmodel) {
 		
-		return hostdao.updateHostGroup(id,hostmodel);
+		return hostdao.updateHostGroup(hostmodel);
 	}
 	
-	public boolean deleteHostGroup(int id) {
+	public Response deleteHostGroup(int id) {
 		
 		return hostdao.deleteHostGroup(id);
 	}
@@ -42,10 +61,80 @@ public class HostGroupJerseyServiceImpl implements HostGroupJerseyService {
 	}
 
 	@Override
-	public boolean updateMultiHost(List<HostGroupJerseyModel> host) {
+	public Response updateMultiHost(List<HostGroupJerseyModel> host) {
 		
 		return hostdao.updateMultiHost(host);
 	}
+	
+	
+	public static List<HostGroupJerseyModel> getJsonTree(List<HostGroupJerseyModel> hostlist) {
+		List<HostGroupJerseyModel> parent = new ArrayList();
+		Map<Integer,List<HostGroupJerseyModel>> map = new HashMap<Integer,List<HostGroupJerseyModel>>();
+		HostGroupJerseyModel hostparent = new HostGroupJerseyModel();
+		List<HostGroupJerseyModel> child =  new ArrayList();
+		
+		for(HostGroupJerseyModel a : hostlist) {
+		
+			if(a.getParentid() ==0) {
+				parent.add(a);
+			} else {
+				if(map.get(a.getParentid())==null) {
+					List<HostGroupJerseyModel> children = new ArrayList();
+					children.add(a);
+					map.put(a.getParentid(), children);
+				} else {
+					map.get(a.getParentid()).add(a);
+				}
+				
+			}
+		}
+		List<HostGroupJerseyModel> result =constructTree(parent,map);
+		
+	
+			ObjectMapper mapper = new ObjectMapper();
+			JsonNode root = mapper.valueToTree(result);
+
+			String str = null;
+			try {
+				
+				
+				str =mapper.writeValueAsString(root);
+				System.out.println(str);
+			} catch (JsonGenerationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+				
+		return result;
+	}
+
+
+	private static List<HostGroupJerseyModel> constructTree(List<HostGroupJerseyModel> parent, Map<Integer, List<HostGroupJerseyModel>> map) {
+		if (map!=null&&parent!=null) {
+			for(HostGroupJerseyModel b : parent) {
+//				for (Map.Entry<Integer,List<HostParent>> entry : map.entrySet()){
+//					if(entry.getKey()==b.id){
+//						b.setChildren(entry.getValue());
+				b.setChildren(map.get(b.getId()));
+				map.remove(b.getId());
+
+				constructTree(b.getChildren(),map);
+					    }
+				}
+		return parent;
+			
+				}
+
+	
+
+	
+
 	
 
 	

@@ -34,6 +34,17 @@ public class HostGroupJerseyModel   {
 		 this.send_to_cta = send_to_cta;
 		 this.description = description;
 	}
+	 public HostGroupJerseyModel(int id,int parentid, String name, boolean hostbaseline, boolean suppress_excluded_service, boolean inverse_suppression,boolean host_trap,boolean send_to_cta, String description) {
+		 this.id = id;
+		 this.parentid=parentid;
+		 this.name=name;
+		 this.hostbaseline=hostbaseline;
+		 this.suppress_excluded_service = suppress_excluded_service;
+		 this.inverse_suppression = inverse_suppression;
+		 this.host_trap = host_trap;
+		 this.send_to_cta = send_to_cta;
+		 this.description = description;
+	}
 	
 	public List<HostGroupJerseyModel> getChildren() {
 		return children;
