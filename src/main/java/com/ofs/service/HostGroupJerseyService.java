@@ -9,7 +9,9 @@ public interface HostGroupJerseyService {
 	public int getHost(HostGroupJerseyModel hostmodel);
 	public List<HostGroupJerseyModel> getHostGroupRecords();
 	public List<HostGroupJerseyModel> getHostGroupTree();
-	public HostGroupJerseyModel updateHostGroup(int id, HostGroupJerseyModel hostmodel);
-	public String deleteHostGroup(int id);
+	public boolean updateHostGroup(int id, HostGroupJerseyModel hostmodel);
+	public boolean deleteHostGroup(int id);
+	public List<HostGroupJerseyModel> addMultipleHost(List<HostGroupJerseyModel> host);
+	public boolean updateMultiHost(List<HostGroupJerseyModel> host);
 
 }

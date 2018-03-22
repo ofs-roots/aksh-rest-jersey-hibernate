@@ -25,14 +25,26 @@ public class HostGroupJerseyServiceImpl implements HostGroupJerseyService {
 		return hostdao.getHostGroupTree();
 	}
 
-	public HostGroupJerseyModel updateHostGroup(int id, HostGroupJerseyModel hostmodel) {
+	public boolean updateHostGroup(int id, HostGroupJerseyModel hostmodel) {
 		
 		return hostdao.updateHostGroup(id,hostmodel);
 	}
 	
-	public String deleteHostGroup(int id) {
+	public boolean deleteHostGroup(int id) {
 		
 		return hostdao.deleteHostGroup(id);
+	}
+
+	@Override
+	public List<HostGroupJerseyModel> addMultipleHost(List<HostGroupJerseyModel> host) {
+		
+		return hostdao.addMultipleHost(host);
+	}
+
+	@Override
+	public boolean updateMultiHost(List<HostGroupJerseyModel> host) {
+		
+		return hostdao.updateMultiHost(host);
 	}
 	
 
