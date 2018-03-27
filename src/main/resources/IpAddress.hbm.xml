@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.ofs.Model.IpAddressModel" table="Ip_address_table">
+		<id name="ipId" type="int" column="id">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="ipAddresses" type="string" column="ip_address"></property>
+		<property name="ipLocation" type="string" column="ip_location"></property>
+		<property name="ipDescription" type="string" column="ip_description"></property>
+<!-- 		<many-to-one name="hostgroup" class="com.ofs.Model.HostGroupJerseyModel"> -->
+<!-- 			<column name="hostgroup_id"> -->
+<!-- 			</column> -->
+<!-- 		</many-to-one> -->
+	</class>
+</hibernate-mapping>

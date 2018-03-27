@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
    
-    <class name="com.ofs.Model.HostGroupJerseyModel" table="Hosttable">
+    <class name="com.ofs.Model.HostGroupJerseyModel" table="Host_table">
     
     <id name = "id" type = "int" column = "id">
          <generator class="native"/>
@@ -21,19 +21,19 @@
         </property>
 
        
-        <property name="hostbaseline" type="boolean">
+        <property name="hostBaseline" type="boolean">
             <column name="hostbaseline" not-null="true" />
         </property>
-        <property name="suppress_excluded_service" type="boolean">
+        <property name="suppressExcludedService" type="boolean">
             <column name="suppress_excluded_service" not-null="true" />
         </property>
-        <property name="inverse_suppression" type="boolean">
+        <property name="inverseSuppression" type="boolean">
             <column name="inverse_suppression" not-null="true" />
         </property>
-        <property name="host_trap" type="boolean">
+        <property name="hostTrap" type="boolean">
             <column name="host_trap" not-null="true" />
         </property>
-         <property name="send_to_cta" type="boolean">
+         <property name="sendToCta" type="boolean">
             <column name="send_to_cta" not-null="true" />
         </property>
          <property name="description" type="string">
@@ -42,6 +42,17 @@
        <!--  <property name="ip_address_range" type="string">
         <column name="ip_address_range" length="50" not-null="true"/>
         </property> -->
+        <list name="ipAddress" table="Ip_address_table" cascade='all'>
+        <key column = "hostgroup_id"></key>
+        <index column="type"></index>
+        <one-to-many class="com.ofs.Model.IpAddressModel"/>
+<!--         <element column="ip_address" type="string"></element> -->
+        </list>
+        <set name="hostGroupUser" table="Host_group_users" cascade="all">
+        <key column="hostgroup_id"></key>
+        <element column="hostgroup_users" type="string">
+        </element>
+        </set>
         
     </class>
 </hibernate-mapping>
