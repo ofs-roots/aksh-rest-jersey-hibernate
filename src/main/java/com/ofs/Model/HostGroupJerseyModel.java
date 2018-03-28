@@ -11,18 +11,18 @@ public class HostGroupJerseyModel implements Serializable   {
 	 * 
 	 */
 	 private static final long serialVersionUID = 1L;
-	 int id;
-	 int parentid;
-	 String name;
-	 boolean hostBaseline;
-	 boolean suppressExcludedService;
-	 boolean inverseSuppression;
-	 boolean hostTrap;
-	 boolean sendToCta;
-	 String description;
-	 List<HostGroupJerseyModel> children;
-	 List<IpAddressModel> ipAddress;
-	 Set<String> hostGroupUser;
+	 private int id;
+	 private int parentid;
+	 private String name;
+	 private boolean hostBaseline;
+	 private boolean suppressExcludedService;
+	 private boolean inverseSuppression;
+	 private boolean hostTrap;
+	 private boolean sendToCta;
+	 private String description;
+	 private List<HostGroupJerseyModel> children;
+	 private List<IpAddressModel> ipAddress;
+	 private Set<String> hostGroupUser;
 	 public Set<String> getHostGroupUser() {
 		return hostGroupUser;
 	}

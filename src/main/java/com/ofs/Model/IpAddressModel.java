@@ -10,10 +10,10 @@ public class IpAddressModel implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	int ipId;
-	String ipAddresses;
-	String ipLocation;
-	String ipDescription;
+	private int ipId;
+	private String ipAddresses;
+	private String ipLocation;
+	private String ipDescription;
 	public String getIpLocation() {
 		return ipLocation;
 	}
