@@ -2,14 +2,8 @@ package com.ofs.Model;
 
 import java.io.Serializable;
 
-
-public class IpAddressModel implements Serializable {
+public class IpAddressModel  {
 	
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private int ipId;
 	private String ipAddresses;
 	private String ipLocation;
@@ -25,31 +19,25 @@ public class IpAddressModel implements Serializable {
 	public String getIpDescription() {
 		return ipDescription;
 	}
-
+	
 	public void setIpDescription(String ipDescription) {
 		this.ipDescription = ipDescription;
-	}
-
-	//	HostGroupJerseyModel hostgroup;
-	IpAddressModel(){}
-	
-	IpAddressModel(String stringJSON){
-		
 	}
 	
 	public String getIpAddresses() {
 		return ipAddresses;
 	}
+	
 	public void setIpAddresses(String ipAddresses) {
 		this.ipAddresses = ipAddresses;
 	}
+	
 	public int getIpId() {
 		return ipId;
 	}
+	
 	public void setIpId(int ipId) {
 		this.ipId = ipId;
 	}
 	
-	
-
 }

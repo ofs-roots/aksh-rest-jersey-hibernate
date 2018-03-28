@@ -22,14 +22,10 @@ public class HostGroupJerseyServiceImpl implements HostGroupJerseyService {
 	HostGroupJerseyDao hostdao = new HostGroupJerseyDaoImpl();
 
 	public int addHost(HostGroupJerseyModel hostmodel) {
-		
-		// TODO Auto-generated method stub
 		return hostdao.addHost(hostmodel);
 	}
 	
-	@Override
 	public HostGroupJerseyModel getRecordById(int id) {
-		// TODO Auto-generated method stub
 		return hostdao.getRecordById(id);
 	}
 
@@ -38,43 +34,33 @@ public class HostGroupJerseyServiceImpl implements HostGroupJerseyService {
 	}
 
 	public List<HostGroupJerseyModel> getHostGroupTree() {
-		
 		List<HostGroupJerseyModel> hostlist = hostdao.getHostGroupRecords();
 		List<HostGroupJerseyModel> treelist = getJsonTree(hostlist);
 		return treelist;
 	}
 
 	public Response updateHostGroup(HostGroupJerseyModel hostmodel) {
-		
 		return hostdao.updateHostGroup(hostmodel);
 	}
 	
 	public Response deleteHostGroup(int id) {
-		
 		return hostdao.deleteHostGroup(id);
 	}
 
-	@Override
 	public List<HostGroupJerseyModel> addMultipleHost(List<HostGroupJerseyModel> host) {
-		
 		return hostdao.addMultipleHost(host);
 	}
 
-	@Override
 	public Response updateMultiHost(List<HostGroupJerseyModel> host) {
-		
 		return hostdao.updateMultiHost(host);
 	}
 	
-	
-	public static List<HostGroupJerseyModel> getJsonTree(List<HostGroupJerseyModel> hostlist) {
+	private static List<HostGroupJerseyModel> getJsonTree(List<HostGroupJerseyModel> hostlist) {
 		List<HostGroupJerseyModel> parent = new ArrayList();
 		Map<Integer,List<HostGroupJerseyModel>> map = new HashMap<Integer,List<HostGroupJerseyModel>>();
 		HostGroupJerseyModel hostparent = new HostGroupJerseyModel();
 		List<HostGroupJerseyModel> child =  new ArrayList();
-		
 		for(HostGroupJerseyModel a : hostlist) {
-		
 			if(a.getParentid() ==0) {
 				parent.add(a);
 			} else {
@@ -85,19 +71,13 @@ public class HostGroupJerseyServiceImpl implements HostGroupJerseyService {
 				} else {
 					map.get(a.getParentid()).add(a);
 				}
-				
 			}
 		}
 		List<HostGroupJerseyModel> result =constructTree(parent,map);
-		
-	
-			ObjectMapper mapper = new ObjectMapper();
-			JsonNode root = mapper.valueToTree(result);
-
-			String str = null;
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.valueToTree(result);
+		String str = null;
 			try {
-				
-				
 				str =mapper.writeValueAsString(root);
 				System.out.println(str);
 			} catch (JsonGenerationException e) {
@@ -110,33 +90,18 @@ public class HostGroupJerseyServiceImpl implements HostGroupJerseyService {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-				
-		return result;
+				return result;
 	}
-
-
+	
 	private static List<HostGroupJerseyModel> constructTree(List<HostGroupJerseyModel> parent, Map<Integer, List<HostGroupJerseyModel>> map) {
 		if (map!=null&&parent!=null) {
 			for(HostGroupJerseyModel b : parent) {
-//				for (Map.Entry<Integer,List<HostParent>> entry : map.entrySet()){
-//					if(entry.getKey()==b.id){
-//						b.setChildren(entry.getValue());
 				b.setChildren(map.get(b.getId()));
 				map.remove(b.getId());
-
 				constructTree(b.getChildren(),map);
 					    }
 				}
 		return parent;
-			
-				}
-
-	
-
-	
-
-	
-
-	
+			}
 
 }

@@ -1,7 +1,5 @@
 package com.ofs.util;
 
-
-
 import java.util.Properties;
 
 import org.hibernate.Session;
@@ -10,9 +8,6 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Mappings;
-
-
-
 
 public class HibernateUtil {
 

@@ -1,8 +1,7 @@
 package com.ofs.controller;
 
-
-
 import java.util.List;
+
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -16,11 +15,12 @@ import javax.ws.rs.core.Response;
 
 import com.ofs.Model.HostGroupJerseyModel;
 import com.ofs.service.HostGroupJerseyService;
-import com.ofs.service.HostGroupJerseyServiceImpl;;
+import com.ofs.service.HostGroupJerseyServiceImpl;
+
 @Path("/hostgroup")
 public class HostGroupJerseyController {
 	HostGroupJerseyModel  hostgroup = new HostGroupJerseyModel();
-	 HostGroupJerseyService hostservice = new HostGroupJerseyServiceImpl();
+	HostGroupJerseyService hostservice = new HostGroupJerseyServiceImpl();
 	 
 	 @POST
 	 @Path("/addMultiple")
@@ -32,9 +32,7 @@ public class HostGroupJerseyController {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public int addHostGroup(HostGroupJerseyModel hostmodel) {
-		
-		return hostservice.addHost(hostmodel);
-			
+		return hostservice.addHost(hostmodel);	
 	}
 	
 	@GET
@@ -54,7 +52,6 @@ public class HostGroupJerseyController {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<HostGroupJerseyModel> getTreeStructure(){
-		
 		return hostservice.getHostGroupTree();
 	}
 	

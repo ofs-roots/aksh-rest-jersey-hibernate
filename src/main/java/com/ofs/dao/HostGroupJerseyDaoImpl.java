@@ -26,7 +26,6 @@ public class HostGroupJerseyDaoImpl implements HostGroupJerseyDao {
 	
 
 	public int addHost(HostGroupJerseyModel hostmodel) {
-		
 		int hostid = 0;
 		try {
 			Session session = HibernateUtil.getSessionFactory().openSession();
@@ -39,12 +38,10 @@ public class HostGroupJerseyDaoImpl implements HostGroupJerseyDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return hostid;
 	}
 	
 	public List<HostGroupJerseyModel> getHostGroupRecords(){
-		
 		List<HostGroupJerseyModel> hostlist = new ArrayList();
 		try {
 			Session session = HibernateUtil.getSessionFactory().openSession();
@@ -60,7 +57,6 @@ public class HostGroupJerseyDaoImpl implements HostGroupJerseyDao {
 		return hostlist;
 		
 	}
-	
 	
 	public Response updateHostGroup(HostGroupJerseyModel hostmodel) {
 		boolean success=false;

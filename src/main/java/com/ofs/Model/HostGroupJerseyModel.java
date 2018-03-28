@@ -4,13 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-public class HostGroupJerseyModel implements Serializable   {
+public class HostGroupJerseyModel   {
 	
-	
-	 /**
-	 * 
-	 */
-	 private static final long serialVersionUID = 1L;
 	 private int id;
 	 private int parentid;
 	 private String name;
@@ -39,12 +34,9 @@ public class HostGroupJerseyModel implements Serializable   {
 		this.ipAddress = ipAddress;
 	}
 	
-	 
-	
-
 	public HostGroupJerseyModel() {}
 	 
-	 public HostGroupJerseyModel(int parentid, String name, boolean hostBaseline, boolean suppressExcludedService, boolean inverseSuppression,boolean hostTrap,boolean sendToCta, String description) {
+	public HostGroupJerseyModel(int parentid, String name, boolean hostBaseline, boolean suppressExcludedService, boolean inverseSuppression,boolean hostTrap,boolean sendToCta, String description) {
 		
 		 this.parentid=parentid;
 		 this.name=name;
@@ -73,7 +65,6 @@ public class HostGroupJerseyModel implements Serializable   {
 	public void setChildren(List<HostGroupJerseyModel> children) {
 		this.children = children;
 	}
-	/*String[] ip_address_range;*/
 	public Integer getId() {
 		return id;
 	}
@@ -92,58 +83,40 @@ public class HostGroupJerseyModel implements Serializable   {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	 public boolean isHostBaseline() {
+	public boolean isHostBaseline() {
 		return hostBaseline;
 	}
-
 	public void setHostBaseline(boolean hostBaseline) {
 		this.hostBaseline = hostBaseline;
 	}
-
 	public boolean isSuppressExcludedService() {
 		return suppressExcludedService;
 	}
-
 	public void setSuppressExcludedService(boolean suppressExcludedService) {
 		this.suppressExcludedService = suppressExcludedService;
 	}
-
 	public boolean isInverseSuppression() {
 		return inverseSuppression;
 	}
-
 	public void setInverseSuppression(boolean inverseSuppression) {
 		this.inverseSuppression = inverseSuppression;
 	}
-
 	public boolean isHostTrap() {
 		return hostTrap;
 	}
-
 	public void setHostTrap(boolean hostTrap) {
 		this.hostTrap = hostTrap;
 	}
-
 	public boolean isSendToCta() {
 		return sendToCta;
 	}
-
 	public void setSendToCta(boolean sendToCta) {
 		this.sendToCta = sendToCta;
 	}
-
 	public String getDescription() {
 			return description;
 		}
-		public void setDescription(String description) {
+	public void setDescription(String description) {
 			this.description = description;
 		}
-		/*public String[] getIp_address_range() {
-			return ip_address_range;
-		}
-		public void setIp_address_range(String[] ip_address_range) {
-			this.ip_address_range = ip_address_range;
-		}
-*/
 }

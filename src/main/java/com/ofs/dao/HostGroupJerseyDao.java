@@ -10,7 +10,6 @@ public interface HostGroupJerseyDao {
 	
 	int addHost(HostGroupJerseyModel hostmodel);
 	List<HostGroupJerseyModel> getHostGroupRecords();
-
 	Response updateHostGroup(HostGroupJerseyModel hostmodel);
 	Response deleteHostGroup(int id);
 	List<HostGroupJerseyModel> addMultipleHost(List<HostGroupJerseyModel> host);
