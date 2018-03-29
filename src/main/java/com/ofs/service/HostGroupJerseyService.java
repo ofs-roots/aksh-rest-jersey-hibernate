@@ -2,16 +2,18 @@ package com.ofs.service;
 
 import java.util.List;
 
+import javax.ws.rs.core.Response;
+
 import com.ofs.Model.HostGroupJerseyModel;
 
 public interface HostGroupJerseyService {
 	
-	public int getHost(HostGroupJerseyModel hostmodel);
-	public List<HostGroupJerseyModel> getHostGroupRecords();
-	public List<HostGroupJerseyModel> getHostGroupTree();
-	public boolean updateHostGroup(int id, HostGroupJerseyModel hostmodel);
-	public boolean deleteHostGroup(int id);
-	public List<HostGroupJerseyModel> addMultipleHost(List<HostGroupJerseyModel> host);
-	public boolean updateMultiHost(List<HostGroupJerseyModel> host);
-
+	int addHost(HostGroupJerseyModel hostmodel);
+	List<HostGroupJerseyModel> getHostGroupRecords();
+	List<HostGroupJerseyModel> getHostGroupTree();
+	Response updateHostGroup(HostGroupJerseyModel hostmodel);
+	Response deleteHostGroup(int id);
+	List<HostGroupJerseyModel> addMultipleHost(List<HostGroupJerseyModel> host);
+	Response updateMultiHost(List<HostGroupJerseyModel> host);
+	HostGroupJerseyModel getRecordById(int id);
 }

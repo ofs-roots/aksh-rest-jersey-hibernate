@@ -19,7 +19,7 @@
 		<!-- Mapped Entities -->
 
 	 	 <mapping resource="HostGroup.hbm.xml"></mapping>
-
+		<mapping resource="IpAddress.hbm.xml"></mapping>
 
 	</session-factory>
 </hibernate-configuration>

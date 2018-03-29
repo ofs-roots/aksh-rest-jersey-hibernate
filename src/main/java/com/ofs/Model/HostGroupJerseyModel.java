@@ -2,36 +2,60 @@ package com.ofs.Model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 public class HostGroupJerseyModel   {
 	
+	 private int id;
+	 private int parentid;
+	 private String name;
+	 private boolean hostBaseline;
+	 private boolean suppressExcludedService;
+	 private boolean inverseSuppression;
+	 private boolean hostTrap;
+	 private boolean sendToCta;
+	 private String description;
+	 private List<HostGroupJerseyModel> children;
+	 private List<IpAddressModel> ipAddress;
+	 private Set<String> hostGroupUser;
+	 public Set<String> getHostGroupUser() {
+		return hostGroupUser;
+	}
+
+	public void setHostGroupUser(Set<String> hostGroupUser) {
+		this.hostGroupUser = hostGroupUser;
+	}
+
+	public List<IpAddressModel> getIpAddress() {
+		return ipAddress;
+	}
+
+	public void setIpAddress(List<IpAddressModel> ipAddress) {
+		this.ipAddress = ipAddress;
+	}
 	
-	 /**
-	 * 
-	 */
-//	 private static final long serialVersionUID = 1L;
-	 int id;
-	 int parentid;
-	 String name;
-	 boolean hostbaseline;
-	 boolean suppress_excluded_service;
-	 boolean inverse_suppression;
-	 boolean host_trap;
-	 boolean send_to_cta;
-	 String description;
-	 List<HostGroupJerseyModel> children;
+	public HostGroupJerseyModel() {}
 	 
-	 public HostGroupJerseyModel() {}
-	 
-	 public HostGroupJerseyModel(int parentid, String name, boolean hostbaseline, boolean suppress_excluded_service, boolean inverse_suppression,boolean host_trap,boolean send_to_cta, String description) {
+	public HostGroupJerseyModel(int parentid, String name, boolean hostBaseline, boolean suppressExcludedService, boolean inverseSuppression,boolean hostTrap,boolean sendToCta, String description) {
 		
 		 this.parentid=parentid;
 		 this.name=name;
-		 this.hostbaseline=hostbaseline;
-		 this.suppress_excluded_service = suppress_excluded_service;
-		 this.inverse_suppression = inverse_suppression;
-		 this.host_trap = host_trap;
-		 this.send_to_cta = send_to_cta;
+		 this.hostBaseline=hostBaseline;
+		 this.suppressExcludedService = suppressExcludedService;
+		 this.inverseSuppression = inverseSuppression;
+		 this.hostTrap = hostTrap;
+		 this.sendToCta = sendToCta;
+		 this.description = description;
+	}
+	 public HostGroupJerseyModel(int id,int parentid, String name, boolean hostBaseline, boolean suppressExcludedService, boolean inverseSuppression,boolean hostTrap,boolean sendToCta, String description) {
+		 this.id = id;
+		 this.parentid=parentid;
+		 this.name=name;
+		 this.hostBaseline=hostBaseline;
+		 this.suppressExcludedService = suppressExcludedService;
+		 this.inverseSuppression = inverseSuppression;
+		 this.hostTrap = hostTrap;
+		 this.sendToCta = sendToCta;
 		 this.description = description;
 	}
 	
@@ -41,7 +65,6 @@ public class HostGroupJerseyModel   {
 	public void setChildren(List<HostGroupJerseyModel> children) {
 		this.children = children;
 	}
-	/*String[] ip_address_range;*/
 	public Integer getId() {
 		return id;
 	}
@@ -60,47 +83,40 @@ public class HostGroupJerseyModel   {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public boolean isHostbaseline() {
-		return hostbaseline;
+	public boolean isHostBaseline() {
+		return hostBaseline;
 	}
-	public void setHostbaseline(boolean host_baseline) {
-		this.hostbaseline = host_baseline;
+	public void setHostBaseline(boolean hostBaseline) {
+		this.hostBaseline = hostBaseline;
 	}
-	public boolean isSuppress_excluded_service() {
-		return suppress_excluded_service;
+	public boolean isSuppressExcludedService() {
+		return suppressExcludedService;
 	}
-	public void setSuppress_excluded_service(boolean suppress_excluded_service) {
-		this.suppress_excluded_service = suppress_excluded_service;
+	public void setSuppressExcludedService(boolean suppressExcludedService) {
+		this.suppressExcludedService = suppressExcludedService;
 	}
-	public boolean isInverse_suppression() {
-		return inverse_suppression;
+	public boolean isInverseSuppression() {
+		return inverseSuppression;
 	}
-	public void setInverse_suppression(boolean inverse_suppression) {
-		this.inverse_suppression = inverse_suppression;
+	public void setInverseSuppression(boolean inverseSuppression) {
+		this.inverseSuppression = inverseSuppression;
 	}
-	public boolean isHost_trap() {
-		return host_trap;
+	public boolean isHostTrap() {
+		return hostTrap;
 	}
-	public void setHost_trap(boolean host_trap) {
-		this.host_trap = host_trap;
+	public void setHostTrap(boolean hostTrap) {
+		this.hostTrap = hostTrap;
 	}
-	public boolean isSend_to_cta() {
-		return send_to_cta;
+	public boolean isSendToCta() {
+		return sendToCta;
 	}
-	public void setSend_to_cta(boolean send_to_cta) {
-		this.send_to_cta = send_to_cta;
+	public void setSendToCta(boolean sendToCta) {
+		this.sendToCta = sendToCta;
 	}
-	 public String getDescription() {
+	public String getDescription() {
 			return description;
 		}
-		public void setDescription(String description) {
+	public void setDescription(String description) {
 			this.description = description;
 		}
-		/*public String[] getIp_address_range() {
-			return ip_address_range;
-		}
-		public void setIp_address_range(String[] ip_address_range) {
-			this.ip_address_range = ip_address_range;
-		}
-*/
 }

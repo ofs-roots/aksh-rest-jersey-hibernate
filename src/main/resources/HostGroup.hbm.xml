@@ -3,9 +3,9 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
    
-    <class name="com.ofs.Model.HostGroupJerseyModel" table="Hosttable">
+    <class name="com.ofs.Model.HostGroupJerseyModel" table="HOST_GROUP_TABLE">
     
-    <id name = "id" type = "int" column = "id">
+    <id name = "id" type = "int" column = "ID">
          <generator class="native"/>
       </id>
        
@@ -13,35 +13,46 @@
             <column name="id" not-null="true" />
         </id> -->
 		<property name="parentid" type="integer">
-			<column name="parentid" not-null="true" />
+			<column name="PARENTID" not-null="true" />
 		</property>
         
         <property name="name" type="string">
-            <column name="name" not-null="true" />
+            <column name="NAME" not-null="true" />
         </property>
 
        
-        <property name="hostbaseline" type="boolean">
-            <column name="hostbaseline" not-null="true" />
+        <property name="hostBaseline" type="boolean">
+            <column name="HOST_BASELINE" not-null="true" />
         </property>
-        <property name="suppress_excluded_service" type="boolean">
-            <column name="suppress_excluded_service" not-null="true" />
+        <property name="suppressExcludedService" type="boolean">
+            <column name="SUPPRESS_EXCLUDED_SERVICE" not-null="true" />
         </property>
-        <property name="inverse_suppression" type="boolean">
-            <column name="inverse_suppression" not-null="true" />
+        <property name="inverseSuppression" type="boolean">
+            <column name="INVERSE_SUPPRESSION" not-null="true" />
         </property>
-        <property name="host_trap" type="boolean">
-            <column name="host_trap" not-null="true" />
+        <property name="hostTrap" type="boolean">
+            <column name="HOST_TRAP" not-null="true" />
         </property>
-         <property name="send_to_cta" type="boolean">
-            <column name="send_to_cta" not-null="true" />
+         <property name="sendToCta" type="boolean">
+            <column name="SEND_TO_CTA" not-null="true" />
         </property>
          <property name="description" type="string">
-            <column name="descriptions" not-null="true" />
+            <column name="DESCRIPTIONS" not-null="true" />
         </property>
        <!--  <property name="ip_address_range" type="string">
         <column name="ip_address_range" length="50" not-null="true"/>
         </property> -->
+        <list name="ipAddress" table="IPADDRESS_TABLE" cascade='all'>
+        <key column = "HOSTGROUP_ID"></key>
+        <index column="TYPE"></index>
+        <one-to-many class="com.ofs.Model.IpAddressModel"/>
+<!--         <element column="ip_address" type="string"></element> -->
+        </list>
+        <set name="hostGroupUser" table="HOST_GROUP_USER" cascade="all">
+        <key column="HOSTGROUP_ID"></key>
+        <element column="HOSTGROUP_USERS" type="string">
+        </element>
+        </set>
         
     </class>
 </hibernate-mapping>
