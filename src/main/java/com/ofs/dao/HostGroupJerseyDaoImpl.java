@@ -30,8 +30,7 @@ public class HostGroupJerseyDaoImpl implements HostGroupJerseyDao {
 		try {
 			Session session = HibernateUtil.getSessionFactory().openSession();
 			Transaction transaction = session.beginTransaction();
-			
-			 hostid = (Integer)session.save(hostmodel);
+			hostid = (Integer)session.save(hostmodel);
 			transaction.commit();
 			HibernateUtil.getSessionFactory().close();
 		} catch (HibernateException e) {
@@ -149,6 +148,24 @@ public class HostGroupJerseyDaoImpl implements HostGroupJerseyDao {
 		}
 		return hostrecord;
 	}	
+	
+	public HostGroupJerseyModel getDuplicateRecord(String name) {
+		HostGroupJerseyModel hostrecord = new HostGroupJerseyModel();
+		try {
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			Transaction transaction = session.beginTransaction();
+			Criteria cr = session.createCriteria(HostGroupJerseyModel.class);
+			cr.add(Restrictions.eq("name",name));
+			hostrecord = (HostGroupJerseyModel)cr.uniqueResult();
+			transaction.commit();
+			HibernateUtil.getSessionFactory().close();
+		} catch (HibernateException e) {
+			
+			e.printStackTrace();
+		}
+		return hostrecord;
+		
+	}
 	
 }
 	

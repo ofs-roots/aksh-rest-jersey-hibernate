@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.NoResultException;
 import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.JsonGenerationException;
@@ -13,6 +14,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import com.ofs.Model.DuplicateNameException;
 import com.ofs.Model.HostGroupJerseyModel;
 import com.ofs.dao.HostGroupJerseyDao;
 import com.ofs.dao.HostGroupJerseyDaoImpl;
@@ -21,9 +23,18 @@ public class HostGroupJerseyServiceImpl implements HostGroupJerseyService {
 	
 	HostGroupJerseyDao hostdao = new HostGroupJerseyDaoImpl();
 
-	public int addHost(HostGroupJerseyModel hostmodel) {
-		return hostdao.addHost(hostmodel);
-	}
+	public int addHost(HostGroupJerseyModel hostmodel) throws DuplicateNameException {
+		HostGroupJerseyModel result = hostdao.getDuplicateRecord(hostmodel.getName());
+		int id;
+
+		if(result==null) {
+			id = hostdao.addHost(hostmodel);
+			}
+		else 
+			throw new DuplicateNameException("HostGroup Name already exixts");
+		
+		return id;
+		}
 	
 	public HostGroupJerseyModel getRecordById(int id) {
 		return hostdao.getRecordById(id);

@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.ofs.Model.DuplicateNameException;
 import com.ofs.Model.HostGroupJerseyModel;
 import com.ofs.service.HostGroupJerseyService;
 import com.ofs.service.HostGroupJerseyServiceImpl;
@@ -31,7 +32,7 @@ public class HostGroupJerseyController {
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public int addHostGroup(HostGroupJerseyModel hostmodel) {
+	public int addHostGroup(HostGroupJerseyModel hostmodel) throws DuplicateNameException {
 		return hostservice.addHost(hostmodel);	
 	}
 	
