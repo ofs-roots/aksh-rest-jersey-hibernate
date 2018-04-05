@@ -72,5 +72,11 @@ public class HostGroupJerseyController {
 	public Response delete(@PathParam("id") int id) {
 		return hostservice.deleteHostGroup(id);
 	}
+	
+	@GET
+	@Path("/export")
+	public void export() {
+		hostservice.exportHostGroup();
+	}
 
 }

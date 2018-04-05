@@ -7,6 +7,8 @@ import javax.ws.rs.core.Response;
 import com.ofs.Model.DuplicateNameException;
 import com.ofs.Model.HostGroupJerseyModel;
 
+
+
 public interface HostGroupJerseyService {
 	
 	int addHost(HostGroupJerseyModel hostmodel) throws DuplicateNameException;
@@ -17,4 +19,6 @@ public interface HostGroupJerseyService {
 	List<HostGroupJerseyModel> addMultipleHost(List<HostGroupJerseyModel> host);
 	Response updateMultiHost(List<HostGroupJerseyModel> host);
 	HostGroupJerseyModel getRecordById(int id);
+	void exportHostGroup();
+
 }
