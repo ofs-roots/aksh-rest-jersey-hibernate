@@ -15,5 +15,6 @@ public interface HostGroupJerseyDao {
 	List<HostGroupJerseyModel> addMultipleHost(List<HostGroupJerseyModel> host);
 	Response updateMultiHost(List<HostGroupJerseyModel> host);
 	HostGroupJerseyModel getRecordById(int id);
+	HostGroupJerseyModel getDuplicateRecord(String name);
 
 }

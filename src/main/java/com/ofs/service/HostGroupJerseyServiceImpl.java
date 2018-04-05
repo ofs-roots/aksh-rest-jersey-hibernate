@@ -1,19 +1,29 @@
 package com.ofs.service;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.NoResultException;
 import javax.ws.rs.core.Response;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import com.ofs.Model.DuplicateNameException;
 import com.ofs.Model.HostGroupJerseyModel;
+import com.ofs.Model.RootHost;
 import com.ofs.dao.HostGroupJerseyDao;
 import com.ofs.dao.HostGroupJerseyDaoImpl;
 
@@ -21,9 +31,18 @@ public class HostGroupJerseyServiceImpl implements HostGroupJerseyService {
 	
 	HostGroupJerseyDao hostdao = new HostGroupJerseyDaoImpl();
 
-	public int addHost(HostGroupJerseyModel hostmodel) {
-		return hostdao.addHost(hostmodel);
-	}
+	public int addHost(HostGroupJerseyModel hostmodel) throws DuplicateNameException {
+		HostGroupJerseyModel result = hostdao.getDuplicateRecord(hostmodel.getName());
+		int id;
+
+		if(result==null) {
+			id = hostdao.addHost(hostmodel);
+			}
+		else 
+			throw new DuplicateNameException("HostGroup Name already exixts");
+		
+		return id;
+		}
 	
 	public HostGroupJerseyModel getRecordById(int id) {
 		return hostdao.getRecordById(id);
@@ -53,6 +72,28 @@ public class HostGroupJerseyServiceImpl implements HostGroupJerseyService {
 
 	public Response updateMultiHost(List<HostGroupJerseyModel> host) {
 		return hostdao.updateMultiHost(host);
+	}
+	
+	@Override
+	public void exportHostGroup() {
+		List<HostGroupJerseyModel> hostlist = hostdao.getHostGroupRecords();
+		List<HostGroupJerseyModel> treelist = getJsonTree(hostlist);
+		DateFormat format = new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss");
+		  String timeStamp = format.format(new Date());
+		String filename = "host_" + timeStamp + ".xml";
+		File file = new File( "C:\\Users\\akshara.g\\Desktop\\xml file\\" +filename);
+		try {
+			JAXBContext jaxbcontext = JAXBContext.newInstance(RootHost.class);
+			Marshaller marshelling = jaxbcontext.createMarshaller();
+			marshelling.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			marshelling.marshal(new RootHost(treelist),file);
+			marshelling.marshal(treelist,System.out);
+			
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	private static List<HostGroupJerseyModel> getJsonTree(List<HostGroupJerseyModel> hostlist) {
@@ -103,5 +144,7 @@ public class HostGroupJerseyServiceImpl implements HostGroupJerseyService {
 				}
 		return parent;
 			}
+
+	
 
 }
